@@ -34,7 +34,7 @@ runs:
         $inputVersion = "${{ inputs.python-version }}"
         Write-Host "Input version: $inputVersion"
 
-        if ($inputVersion -match "^\\d+\\.\\d+$") {
+        if ($inputVersion -match "^\d+\.\d+$") {
           $repo = "${{ inputs.github-repo }}"
           $headers = @{
             "User-Agent" = "Hurious-Windows7-Build"
@@ -48,7 +48,7 @@ runs:
             $tags = Invoke-RestMethod -Uri $url -Headers $headers
             foreach ($tag in $tags) {
               $version = $tag.name -replace "^v", ""
-              if ($version -match "^$([regex]::Escape($inputVersion))\\.\\d+$") {
+              if ($version -match "^$([regex]::Escape($inputVersion))\.\d+$") {
                 $versions += $version
               }
             }

@@ -1,12 +1,11 @@
 name: Test composite action
 
-on: [ push, pull_request ]
+on: [ push, pull_request, workflow_dispatch ]
 
 jobs:
   test-composite:
     name: Test composite on Python${{ matrix.python-version }} arch ${{ matrix.arch }} freethreaded ${{ matrix.freethreaded }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    continue-on-error: true
     strategy:
       matrix:
         os: [ windows-2022, windows-2025, windows-latest ]
